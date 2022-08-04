@@ -1,3 +1,3 @@
-# Learn-JS
+# Rock paper scissor
 
-I learn JS Here
+Bienvenidos
