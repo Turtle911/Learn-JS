@@ -57,8 +57,10 @@
 
 		if (userScore > computerScore) {
 			return "User wins the game with score of " + userScore + "! The computer scored only " + computerScore;
-		} else {
+		} else if (computerScore > userScore) {
 			return "Computer wins the game with score of " + computerScore + "! The user scored only " + userScore;
+		} else {
+			return "Match ended with a draw!";
 		}
 	}
 	console.log(game());
