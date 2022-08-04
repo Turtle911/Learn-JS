@@ -5,49 +5,61 @@
 		return values[item];
 	}
 
-	const ComputerSelection = getComputerChoice().toLowerCase();
-	const playerSelection = prompt("Enter something").toLowerCase();
-	let flag = false;
-
-	console.log("The user selection is " + playerSelection);
-	console.log("The computer selection is " + ComputerSelection);
+	let flag = "Computer wins";
+	let userScore = 0;
+	let computerScore = 0;
 
 	function playRound(playerSelection, ComputerSelection) {
 		if (playerSelection === "scissors") {
 			if (ComputerSelection === "paper") {
-				flag = true;
+				flag = "User wins";
 			} else if (ComputerSelection === "rock") {
-				flag = false;
+				flag = "Computer wins";
 			} else {
 				flag = "draw";
 			}
 		} else if (playerSelection === "rock") {
 			if (ComputerSelection === "scissors") {
-				flag = true;
+				flag = "User wins";
 			} else if (ComputerSelection == "paper") {
-				flag = false;
+				flag = "Computer wins";
 			} else {
 				flag = "draw";
 			}
 		} else if (playerSelection === "paper") {
 			if (ComputerSelection === "rock") {
-				flag = true;
+				flag = "User wins";
 			} else if (ComputerSelection === "scissors") {
-				flag = false;
+				flag = "Computer wins";
 			} else {
 				flag = "draw";
 			}
 		}
 
 		console.log(flag);
-		if (flag === true) {
+		if (flag === "User wins") {
+			userScore++;
 			return "Congrats,You  beat the computer!";
 		} else if (flag === "draw") {
 			return "Its a tie!";
 		} else {
+			computerScore++;
 			return "You Lose!";
 		}
 	}
 
-	console.log(playRound(playerSelection, ComputerSelection));
+	function game() {
+		for (let i = 0; i < 5; i++) {
+			const ComputerSelection = getComputerChoice().toLowerCase();
+			const playerSelection = prompt("Enter something").toLowerCase();
+			playRound(playerSelection, ComputerSelection);
+		}
+
+		if (userScore > computerScore) {
+			return "User wins the game with score of " + userScore + "! The computer scored only " + computerScore;
+		} else {
+			return "Computer wins the game with score of " + computerScore + "! The user scored only " + userScore;
+		}
+	}
+	console.log(game());
 </script>
