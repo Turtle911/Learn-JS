@@ -1,53 +1,53 @@
 <script type="text/javascript">
-  function getComputerChoice() {
-    const values = ["Rock", "Paper", "Scissors"];
-    const item = Math.floor(Math.random() * values.length);
-    return values[item];
-  }
+	function getComputerChoice() {
+		const values = ["Rock", "Paper", "Scissors"];
+		const item = Math.floor(Math.random() * values.length);
+		return values[item];
+	}
 
-  const ComputerSelection = getComputerChoice().toLowerCase();
-  const playerSelection = prompt("Enter something").toLowerCase();
-  let flag = false;
+	const ComputerSelection = getComputerChoice().toLowerCase();
+	const playerSelection = prompt("Enter something").toLowerCase();
+	let flag = false;
 
-  console.log("The user selection is " + playerSelection);
-  console.log("The computer selection is " + ComputerSelection);
+	console.log("The user selection is " + playerSelection);
+	console.log("The computer selection is " + ComputerSelection);
 
-  function playRound(playerSelection, ComputerSelection) {
-    if (playerSelection === "scissors") {
-      if (ComputerSelection === "paper") {
-        flag = true;
-      } else if (ComputerSelection === "rock") {
-        flag = false;
-      } else {
-        flag = "draw";
-      }
-    } else if (playerSelection === "rock") {
-      if (ComputerSelection === "scissors") {
-        flag = true;
-      } else if (ComputerSelection == "paper") {
-        flag = false;
-      } else {
-        flag = "draw";
-      }
-    } else if (playerSelection === "paper") {
-      if (ComputerSelection === "rock") {
-        flag = true;
-      } else if (ComputerSelection === "scissors") {
-        flag = false;
-      } else {
-        flag = "draw";
-      }
-    }
+	function playRound(playerSelection, ComputerSelection) {
+		if (playerSelection === "scissors") {
+			if (ComputerSelection === "paper") {
+				flag = true;
+			} else if (ComputerSelection === "rock") {
+				flag = false;
+			} else {
+				flag = "draw";
+			}
+		} else if (playerSelection === "rock") {
+			if (ComputerSelection === "scissors") {
+				flag = true;
+			} else if (ComputerSelection == "paper") {
+				flag = false;
+			} else {
+				flag = "draw";
+			}
+		} else if (playerSelection === "paper") {
+			if (ComputerSelection === "rock") {
+				flag = true;
+			} else if (ComputerSelection === "scissors") {
+				flag = false;
+			} else {
+				flag = "draw";
+			}
+		}
 
-    console.log(flag);
-    if (flag === true) {
-      return "Congrats,You  beat the computer!";
-    } else if (flag === "draw") {
-      return "Its a tie!";
-    } else {
-      return "You Lose!";
-    }
-  }
+		console.log(flag);
+		if (flag === true) {
+			return "Congrats,You  beat the computer!";
+		} else if (flag === "draw") {
+			return "Its a tie!";
+		} else {
+			return "You Lose!";
+		}
+	}
 
-  console.log(playRound(playerSelection, ComputerSelection));
+	console.log(playRound(playerSelection, ComputerSelection));
 </script>
