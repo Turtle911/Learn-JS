@@ -1,59 +1,127 @@
+//Button selectors
+const rock = document.getElementById("rock");
+const paper = document.getElementById("paper");
+const scissor = document.getElementById("scissor");
+
+//Score
+const score = document.querySelector(".score");
+const uScore = document.createElement("div");
+const cScore = document.createElement("div");
+
+//FinalScore
+const endWinners = document.createElement("div");
+const endScore = document.querySelector(".endScore");
+
+//Winner declarations
+const roundWinner = document.createElement("div");
+const finalWinner = document.createElement("div");
+
+//Refresh
+const refreshContainer = document.createElement("div");
+const refresh = document.createElement("button");
+
+//Get random computer choice
 function getComputerChoice() {
-	const values = ["Rock", "Paper", "Scissors"];
+	const values = [rock, paper, scissor];
 	const item = Math.floor(Math.random() * values.length);
 	return values[item];
 }
 
-let flag = "Computer wins";
+//Score counters
 let userScore = 0;
 let computerScore = 0;
 
-function playRound(playerSelection, ComputerSelection) {
-	if (playerSelection === "scissors") {
-		if (ComputerSelection === "paper") {
-			flag = "User wins";
-		} else if (ComputerSelection === "rock") {
-			flag = "Computer wins";
-		} else {
-			flag = "draw";
-		}
-	} else if (playerSelection === "rock") {
-		if (ComputerSelection === "scissors") {
-			flag = "User wins";
-		} else if (ComputerSelection == "paper") {
-			flag = "Computer wins";
-		} else {
-			flag = "draw";
-		}
-	} else if (playerSelection === "paper") {
-		if (ComputerSelection === "rock") {
-			flag = "User wins";
-		} else if (ComputerSelection === "scissors") {
-			flag = "Computer wins";
-		} else {
-			flag = "draw";
-		}
-	}
+//Update Scores
+uScore.innerText = " The user score is : " + userScore;
+cScore.innerText = " The computer score is : " + computerScore;
+score.appendChild(uScore);
+score.appendChild(cScore);
+let flag = false;
 
-	console.log(flag);
-	if (flag === "User wins") {
-		userScore++;
-		return "Congrats,You  beat the computer!";
-	} else if (flag === "draw") {
-		return "Its a tie!";
-	} else {
-		computerScore++;
-		return "You Lose!";
-	}
-}
+endScore.appendChild(endWinners);
 
-function game() {
-	if (userScore > computerScore) {
-		return "User wins the game with score of " + userScore + "! The computer scored only " + computerScore;
-	} else if (computerScore > userScore) {
-		return "Computer wins the game with score of " + computerScore + "! The user scored only " + userScore;
+//Check if game is done
+checkScore = () => {
+	if (userScore >= 5 && computerScore < userScore) {
+		flag = true;
+		finalWinner.innerText = " The final winner is user!";
+		endWinners.appendChild(finalWinner);
+
+		return;
+	} else if (computerScore >= 5 && userScore < computerScore) {
+		flag = true;
+		finalWinner.innerText = "The final winner is computer!";
+		endWinners.appendChild(finalWinner);
+
+		return;
 	} else {
-		return "Match ended with a draw!";
+		return;
 	}
-}
-console.log(game());
+};
+
+//Actual function for play
+playRound = (playerSelection, ComputerSelection) => {
+	//Inital check for game-end conditions
+	checkScore();
+	//If game end -- add reset button
+	if (flag === true) {
+		document.body.appendChild(refreshContainer);
+		refreshContainer.style.cssText += "display:flex; justify-content:center";
+		refresh.innerText = "Click me to reload";
+		refresh.addEventListener("click", () => location.reload());
+		refreshContainer.appendChild(refresh);
+		return;
+	}
+	//Player and Computer rounds
+	if (playerSelection === scissor) {
+		if (ComputerSelection === paper) {
+			userScore++;
+			roundWinner.innerText = "The round winner is user!";
+			endWinners.appendChild(roundWinner);
+			uScore.innerText = " The user score is : " + userScore;
+		} else if (ComputerSelection === rock) {
+			computerScore++;
+			roundWinner.innerText = "The round winner is computer!";
+			endWinners.appendChild(roundWinner);
+			cScore.innerText = " The computer score is : " + computerScore;
+		} else {
+			endWinners.appendChild(roundWinner);
+			roundWinner.innerText = "This round is a draw!";
+		}
+	} else if (playerSelection === rock) {
+		if (ComputerSelection === scissor) {
+			userScore++;
+			roundWinner.innerText = "The round winner is user!";
+			endWinners.appendChild(roundWinner);
+			uScore.innerText = " The user score is : " + userScore;
+		} else if (ComputerSelection == paper) {
+			computerScore++;
+			roundWinner.innerText = "The round winner is computer!";
+			endWinners.appendChild(roundWinner);
+			cScore.innerText = " The computer score is : " + computerScore;
+		} else {
+			endWinners.appendChild(roundWinner);
+			roundWinner.innerText = "This round is a draw!";
+		}
+	} else if (playerSelection === paper) {
+		if (ComputerSelection === rock) {
+			userScore++;
+			roundWinner.innerText = "The round winner is user!";
+			endWinners.appendChild(roundWinner);
+			uScore.innerText = " The user score is : " + userScore;
+		} else if (ComputerSelection === scissor) {
+			computerScore++;
+			roundWinner.innerText = "The round winner is computer!";
+			endWinners.appendChild(roundWinner);
+			cScore.innerText = " The computer score is : " + computerScore;
+		} else {
+			endWinners.appendChild(roundWinner);
+			roundWinner.innerText = "This round is a draw!";
+		}
+	}
+};
+
+//Eventlisteners for button to perform a move
+rock.addEventListener("click", () => playRound(rock, getComputerChoice()));
+scissor.addEventListener("click", () => playRound(scissor, getComputerChoice()));
+paper.addEventListener("click", () => playRound(paper, getComputerChoice()));

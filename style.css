@@ -1,0 +1,37 @@
+body {
+	background-color: rgb(56, 11, 44);
+}
+
+.heading {
+	display: flex;
+	justify-content: center;
+	color: #fafafa;
+}
+
+.characters {
+	display: flex;
+	justify-content: center;
+	margin: 20px;
+}
+
+div {
+	color: #fafafa;
+	font-size: 24px;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.score {
+	display: flex;
+	justify-content: space-around;
+}
+
+.endScore {
+	display: flex;
+	justify-content: space-around;
+}
+
+.characters > button {
+	display: flex;
+	justify-content: center;
+	font-size: 80px;
+}
